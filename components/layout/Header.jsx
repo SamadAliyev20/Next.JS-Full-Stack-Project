@@ -4,11 +4,16 @@ import Link from "next/link";
 import {FaUserAlt,FaShoppingCart,FaSearch} from 'react-icons/fa'
 import Search from "../ui/Search";
 import {GiHamburgerMenu,GiCancel} from 'react-icons/gi'
+import { useRouter } from "next/router";
+
 const Header = () => {
   const [isSearchModal, setIsSearchModal] = useState(false)
   const [isMenuModal, setIsMenuModal] = useState(false)
+  const router = useRouter();
   return (
-    <div className="h-[5.5rem] bg-secondary relative">
+    <div className={`h-[5.5rem] z-50 relative ${
+      router.asPath === "/" ? "bg-transparent" : "bg-secondary"
+    }`}>
       <div className="container text-white mx-auto flex justify-between h-full items-center">
       <div>
         <Logo />
