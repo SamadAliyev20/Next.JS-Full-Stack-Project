@@ -4,15 +4,17 @@ import MenuWrapper from "@/components/product/MenuWrapper";
 import About from "@/components/About";
 import React from "react";
 import Reservation from "@/components/Reservation";
+import Customers from "@/components/customers/Customers";
 
 const index = () => {
-  return <div>
+  return <React.Fragment>
     <Carousel/>
     <Campaigns/>
     <MenuWrapper/>
     <About/>
-    <Reservation/> 
-  </div>;
+    <Reservation/>
+    <Customers/> 
+  </React.Fragment>;
 };
 
 export default index;
