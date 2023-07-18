@@ -21,16 +21,16 @@ const Header = () => {
       <nav className={`sm:static absolute top-0 left-0 z-50  h-screen w-full sm:text-white sm:w-auto sm:h-auto text-black sm:bg-transparent sm:flex hidden bg-white ${isMenuModal === true &&"!grid place-content-center"}`}>
         <ul className="flex gap-x-2 gap-y-4 sm:flex-row flex-col items-center ">
           <li>
-            <Link className="px-[5px] py-[10px] hover:text-primary uppercase" href="/home">Home</Link>
+            <Link className="px-[5px] py-[10px] hover:text-primary uppercase" href="/">Home</Link>
           </li>
           <li>
-            <Link className="px-[5px] py-[10px] hover:text-primary uppercase" href="/home">Menu</Link>
+            <Link className="px-[5px] py-[10px] hover:text-primary uppercase" href="/menu">Menu</Link>
           </li>
           <li>
-            <Link className="px-[5px] py-[10px] hover:text-primary uppercase" href="/home">About</Link>
+            <Link className="px-[5px] py-[10px] hover:text-primary uppercase" href="/about">About</Link>
           </li>
           <li>
-            <Link className="px-[5px] py-[10px] hover:text-primary uppercase" href="/home">Book Table</Link>
+            <Link className="px-[5px] py-[10px] hover:text-primary uppercase" href="/reservation">Book Table</Link>
           </li>
         </ul>
         {
@@ -48,7 +48,7 @@ const Header = () => {
         }
       </nav>
       <div className="flex gap-x-4 items-center">
-        <Link href={"#"}>
+        <Link href={"/auth/login"}>
           <FaUserAlt className="hover:text-primary transition-all"/>
         </Link>
         <Link href={"#"}>
