@@ -22,38 +22,42 @@ const Header = () => {
         </div>
         <nav
           className={`sm:static absolute top-0 left-0 z-50  h-screen w-full sm:text-white sm:w-auto sm:h-auto text-black sm:bg-transparent sm:flex hidden bg-white ${
-            isMenuModal === true && "!grid place-content-center"
+            isMenuModal === true &&  "!grid place-content-center"
           }`}
         >
-          <ul className="flex gap-x-2 gap-y-4 sm:flex-row flex-col items-center ">
+          <ul className="flex gap-x-2 gap-y-4 sm:flex-row flex-col items-center">
             <li>
               <Link
-                className="px-[5px] py-[10px] hover:text-primary uppercase"
+                className={`px-[5px] py-[10px] hover:text-primary uppercase ${router.asPath === "/" && "text-primary"}`}
                 href="/"
+                onClick={() => setIsMenuModal(false)}
               >
                 Home
               </Link>
             </li>
             <li>
               <Link
-                className="px-[5px] py-[10px] hover:text-primary uppercase"
+               className={`px-[5px] py-[10px] hover:text-primary uppercase ${router.asPath === "/menu" && "text-primary"}`}
                 href="/menu"
+                onClick={() => setIsMenuModal(false)}
               >
                 Menu
               </Link>
             </li>
             <li>
               <Link
-                className="px-[5px] py-[10px] hover:text-primary uppercase"
+                className={`px-[5px] py-[10px] hover:text-primary uppercase ${router.asPath === "/about" && "text-primary"}`}
                 href="/about"
+                onClick={() => setIsMenuModal(false)}
               >
                 About
               </Link>
             </li>
             <li>
               <Link
-                className="px-[5px] py-[10px] hover:text-primary uppercase"
+                className={`px-[5px] py-[10px] hover:text-primary uppercase ${router.asPath === "/reservation" && "text-primary"}`}
                 href="/reservation"
+                onClick={() => setIsMenuModal(false)}
               >
                 Book Table
               </Link>
@@ -85,7 +89,7 @@ const Header = () => {
           <Link onClick={() => setIsSearchModal(true)} href={"#"}>
             <FaSearch className="hover:text-primary transition-all" />
           </Link>
-          <Link href={"#"} className="md:inline-block hidden">
+          <Link href={"/menu"} className="md:inline-block hidden">
             <button className="btn-primary">Order Online</button>
           </Link>
           <button
