@@ -3,7 +3,7 @@ import Home from "./home";
 
 export default function Index() {
   return (
-    <div className="">
+    <div className="prevent-select">
       <Head>
         <title>Food-Ecommerce+Next.JS</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -13,7 +13,6 @@ export default function Index() {
           crossOrigin="true"
         />
       </Head>
-      
       <Home />
     </div>
   );

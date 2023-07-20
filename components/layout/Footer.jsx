@@ -2,7 +2,7 @@ import Title from "../ui/Title";
 
 const Footer = () => {
   return (
-    <div className="bg-secondary text-white">
+    <div className="bg-secondary text-white prevent-select">
       <div className="container mx-auto pt-16 pb-6">
         <div className="flex md:justify-between justify-center text-center flex-wrap md:gap-y-0 gap-y-6 ">
           <div className="md:flex-1">

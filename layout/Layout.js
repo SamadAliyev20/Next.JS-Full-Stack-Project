@@ -4,11 +4,11 @@ import React from 'react'
 
 const Layout = ({children}) => {
   return (
-    <React.Fragment>
+    <div className='prevent-select'>
      <Header/>
      {children}
      <Footer/>
-    </React.Fragment>
+    </div>
   )
 }
 

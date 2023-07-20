@@ -12,7 +12,7 @@ const Header = () => {
   const router = useRouter();
   return (
     <div
-      className={`h-[5.5rem] z-50 relative ${
+      className={`h-[5.5rem] prevent-select z-50 relative ${
         router.asPath === "/" ? "bg-transparent" : "bg-secondary"
       }`}
     >
@@ -82,8 +82,9 @@ const Header = () => {
             </span>
           </Link>
           <Link href={"/cart"}>
-            <span>
+            <span className="relative">
               <FaShoppingCart className="hover:text-primary transition-all cursor-pointer" />
+              <span className="absolute -top-2 -right-3 text-black font-semibold bg-primary w-4 h-4 text-xd grid place-content-center rounded-full ">0</span>
             </span>
           </Link>
           <Link onClick={() => setIsSearchModal(true)} href={"#"}>
