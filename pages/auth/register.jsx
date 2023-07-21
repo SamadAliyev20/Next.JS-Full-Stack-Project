@@ -5,13 +5,25 @@ import axios from "axios";
 import { useFormik } from "formik";
 import Link from "next/link";
 import React from "react";
+import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 const Register = () => {
+  const { push } = useRouter();
   const onSubmit = async (values, actions) => {
     try {
-      const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/users/register`,values)
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/users/register`,
+        values
+      );
+      if (res.status === 200) {
+        toast.success("User registered successfully");
+        push("/auth/login");
+      }
     } catch (err) {
-      console.log(err);
+      if (err.response) {
+        toast.error(err.response.data.message);
+      }
     }
   };
   const { values, errors, touched, handleSubmit, handleChange, handleBlur } =
@@ -82,7 +94,9 @@ const Register = () => {
           ))}
         </div>
         <div className="flex flex-col w-full gap-y-3 mt-6">
-          <button type="submit" className="btn-primary">REGISTER</button>
+          <button type="submit" className="btn-primary">
+            REGISTER
+          </button>
           <Link href="/auth/login">
             <span className="text-sm underline cursor-pointer text-secondary">
               Do you have a account?
