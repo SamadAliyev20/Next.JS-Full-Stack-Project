@@ -1,14 +1,28 @@
 import Input from "@/components/form/Input";
 import Title from "@/components/ui/Title";
 import { adminSchema } from "@/schema/adminSchema";
+import axios from "axios";
 import { useFormik } from "formik";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
+import { toast } from "react-toastify";
 
 const Admin = () => {
+  const { push } = useRouter();
   const onSubmit = async (values, actions) => {
-    await new Promise((resolve) => setTimeout(resolve, 4000));
-    actions.resetForm();
+    try {
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/admin`,
+        values
+      );
+      if (res.status === 200) {
+        toast.success("Admin logged in successfully");
+        push("/admin/profile");
+      }
+    } catch (err) {
+      toast.error(err);
+    }
   };
   const { values, errors, touched, handleSubmit, handleChange, handleBlur } =
     useFormik({
@@ -22,14 +36,14 @@ const Admin = () => {
 
   const inputs = [
     {
-        id: 1,
-        name: "username",
-        type: "text",
-        placeholder: "Your Username",
-        value: values.username,
-        errorMessage: errors.username,
-        touched: touched.username,
-      },
+      id: 1,
+      name: "username",
+      type: "text",
+      placeholder: "Your Username",
+      value: values.username,
+      errorMessage: errors.username,
+      touched: touched.username,
+    },
     {
       id: 2,
       name: "password",
@@ -58,7 +72,9 @@ const Admin = () => {
           ))}
         </div>
         <div className="flex flex-col w-full gap-y-3 mt-6">
-          <button className="btn-primary">LOGIN</button>
+          <button type="submit" className="btn-primary">
+            LOGIN
+          </button>
           <Link href="/">
             <span className="text-sm underline cursor-pointer text-secondary">
               Return Home
@@ -68,6 +84,21 @@ const Admin = () => {
       </form>
     </div>
   );
+};
+
+export const getServerSideProps = (ctx) => {
+  const cookie = ctx.req?.cookies || "";
+  if (cookie.token === process.env.ADMIN_TOKEN) {
+    return {
+      redirect: {
+        destination: "admin/profile",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {},
+  };
 };
 
 export default Admin;
