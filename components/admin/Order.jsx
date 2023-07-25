@@ -34,7 +34,7 @@ const Order = () => {
                 63107...
               </td>
               <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                Emin Başbayan
+                Samad Aliyev
               </td>
               <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
                 $12

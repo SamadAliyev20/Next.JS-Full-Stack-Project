@@ -72,19 +72,19 @@ const Index = () => {
           <h4 className="text-xl font-bold">Choose The Size</h4>
           <div className="flex items-center gap-x-20 md:justify-start justify-center">
             <div onClick={() => handleSize(0) } className="relative w-8 h-8 cursor-pointer hover:animate-pulse">
-              <Image src="/images/size.png" alt="" layout="fill" />
+              <Image src="/images/size.png" alt="" layout="fill" className="dark:bg-white dark:rounded-full" />
               <span className="absolute top-0 -right-6 text-xs bg-primary text-white rounded-full px-[5px] font-medium">
                 Small
               </span>
             </div>
             <div onClick={() => handleSize(1) } className="relative w-12 h-12 cursor-pointer hover:animate-pulse">
-              <Image src="/images/size.png" alt="" layout="fill" />
+              <Image src="/images/size.png" alt="" layout="fill" className="dark:bg-white dark:rounded-full" />
               <span className="absolute top-0 -right-8 text-xs bg-primary text-white rounded-full px-[5px] font-medium">
                 Medium
               </span>
             </div>
             <div onClick={() => handleSize(2) } className="relative w-16 h-16 cursor-pointer hover:animate-pulse">
-              <Image src="/images/size.png" alt="" layout="fill" />
+              <Image src="/images/size.png" alt="" layout="fill" className="dark:bg-white dark:rounded-full" />
               <span className="absolute top-0 -right-4 text-xs bg-primary text-white rounded-full px-[5px] font-medium">
                 Large
               </span>

@@ -48,7 +48,7 @@ const Header = () => {
           <Logo />
         </div>
         <nav
-          className={`sm:static absolute top-0 left-0 z-50  h-screen w-full sm:text-white  sm:w-auto sm:h-auto text-black sm:bg-transparent sm:flex hidden bg-white ${
+          className={`sm:static absolute top-0 left-0 z-50  h-screen w-full sm:text-white  sm:w-auto sm:h-auto text-black sm:bg-transparent sm:flex hidden bg-white  ${
             isMenuModal === true && "!grid place-content-center"
           }`}
         >
