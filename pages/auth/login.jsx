@@ -3,20 +3,47 @@ import Title from "@/components/ui/Title";
 import { loginSchema } from "@/schema/loginSchema";
 import { useFormik } from "formik";
 import Link from "next/link";
-import React from "react";
-import { useSession, signIn } from "next-auth/react";
+import { signIn, getSession, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { useEffect, useState } from "react";
 const Login = () => {
+  const { push } = useRouter();
   const { data: session } = useSession();
-  const onSubmit = async (values) => {
-   const {email,password}=values;
-   let options = {redirect: false,email,password};
-   try {
-    const res = await signIn("credentials", options);
-  } catch (err) {
-    console.log(err);
-  }
+  const [currentUser, setCurrentUser] = useState();
+  const onSubmit = (values) => {
+    const { email, password } = values;
+    let options = { redirect: false, email, password };
+
+    try {
+      const post = setTimeout(async () => {
+        const res = await signIn("credentials", options);
+        if (res.status === 401) {
+          toast.error("Incorrect email or password");
+        }
+        if (res.status === 200) {
+          toast.success("User logged in successfully");
+        }
+      }, 500);
+    } catch (err) {
+      console.log(err);
+    }
   };
-  console.log(session);
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users`);
+        setCurrentUser(
+          res.data?.find((user) => user.email === session?.user?.email)
+        );
+        push("/profile/" + currentUser?._id);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getUser();
+  }, [session, push, currentUser]);
   const { values, errors, touched, handleSubmit, handleChange, handleBlur } =
     useFormik({
       initialValues: {
@@ -65,7 +92,7 @@ const Login = () => {
           ))}
         </div>
         <div className="flex flex-col w-full gap-y-3 mt-6">
-          <button  type="submit" className="btn-primary">
+          <button type="submit" className="btn-primary">
             LOGIN
           </button>
           <button
@@ -86,5 +113,24 @@ const Login = () => {
     </div>
   );
 };
+
+export async function getServerSideProps({ req }) {
+  const session = await getSession({ req });
+  if (session) {
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users/`);
+  const user = res.data?.find((user) => user.email === session?.user.email);
+    if(session && user) {
+      return {
+        redirect: {
+          destination: "/profile/" + user._id,
+          permanent: false,
+        },
+      };
+    }
+  }
+  return {
+    props: {},
+  };
+}
 
 export default Login;

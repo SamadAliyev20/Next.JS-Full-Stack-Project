@@ -14,15 +14,15 @@ export default function App({
   pageProps: { session, ...pageProps },
 }) {
   return (
-    <ThemeProvider enableSystem={true} attribute="class">
-      <SessionProvider session={session}>
+    <SessionProvider session={session}>
+      <ThemeProvider enableSystem={true} attribute="class">
         <Provider store={store}>
           <Layout>
             <ToastContainer />
             <Component {...pageProps} />
           </Layout>
         </Provider>
-      </SessionProvider>
-    </ThemeProvider>
+      </ThemeProvider>
+    </SessionProvider>
   );
 }

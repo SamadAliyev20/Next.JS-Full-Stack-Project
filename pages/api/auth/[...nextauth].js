@@ -1,17 +1,12 @@
 import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
-import { MongoDBAdapter } from "@auth/mongodb-adapter";
-import clientPromise from "@/util/mongo";
 import CredentialsProvider from "next-auth/providers/credentials";
 import User from "@/models/User";
 import dbConnect from "@/util/dbConnect";
 import bcrypt from "bcrypt";
 import { toast } from "react-toastify";
-
-
 dbConnect();
 export default NextAuth({
-  adapter: MongoDBAdapter(clientPromise),
   providers: [
     GithubProvider({
       clientId: process.env.GITHUB_ID,
@@ -29,7 +24,7 @@ export default NextAuth({
         const password = credentials.password;
         const user = await User.findOne({ email: email });
         if (!user) {
-         toast.error("User not found");
+          toast.error("User not found");
         }
         if (user) {
           return signInUser({ user, password });
@@ -49,5 +44,7 @@ const signInUser = async ({ user, password }) => {
   if (!isMatch) {
     throw new Error("Incorrect password or Email!");
   }
-  return user;  
+  if (isMatch) {
+    return user;
+  }
 };
