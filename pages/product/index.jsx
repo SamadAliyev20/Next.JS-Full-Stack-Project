@@ -30,7 +30,7 @@ const Index = () => {
   const [extraItems, setExtraItems] = useState(extraItem)
   const [extras, setExtras] = useState([])
   const cart = useSelector((state) =>state.cart)
-  console.log(cart);
+
   const handleSize = (sizeIndex) => {
   const difference = prices[sizeIndex] - prices[size]
   setSize(sizeIndex)
@@ -45,7 +45,6 @@ const Index = () => {
   if(checked) {
     changePrice(item.price)
     setExtras([...extras,item])
-    console.log(...extras,item);
   }
   else{
     changePrice(-item.price);

@@ -6,11 +6,11 @@ import React from "react";
 import Reservation from "@/components/Reservation";
 import Customers from "@/components/customers/Customers";
 
-const index = () => {
+const index = ({categories}) => {
   return <React.Fragment>
     <Carousel/>
     <Campaigns/>
-    <MenuWrapper/>
+    <MenuWrapper categories={categories}/>
     <About/>
     <Reservation/>
     <Customers/> 
