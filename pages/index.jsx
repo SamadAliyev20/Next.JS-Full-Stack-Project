@@ -2,7 +2,7 @@ import Head from "next/head";
 import Home from "./home";
 import axios from "axios";
 
-export default function Index({ categories }) {
+export default function Index({ categories,products }) {
   return (
     <div className="prevent-select">
       <Head>
@@ -14,17 +14,20 @@ export default function Index({ categories }) {
           crossOrigin="true"
         />
       </Head>
-      <Home categories={categories} />
+      <Home categories={categories} products={products} />
     </div>
   );
 }
 
 export const getServerSideProps = async () => {
- const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/categories`);
- console.log(res.data);
+ const category = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/categories`);
+ const product = await axios.get(
+  `${process.env.NEXT_PUBLIC_API_URL}/products`
+);
   return {
     props: {
-      categories: res.data ? res.data : [],
+      categories: category.data ? category.data : [],
+      products: product.data ? product.data : [],
     },
   };
 }

@@ -6,15 +6,17 @@ import React from "react";
 import Reservation from "@/components/Reservation";
 import Customers from "@/components/customers/Customers";
 
-const index = ({categories}) => {
-  return <React.Fragment>
-    <Carousel/>
-    <Campaigns/>
-    <MenuWrapper categories={categories}/>
-    <About/>
-    <Reservation/>
-    <Customers/> 
-  </React.Fragment>;
+const index = ({ categories, products }) => {
+  return (
+    <React.Fragment>
+      <Carousel />
+      <Campaigns />
+      <MenuWrapper categories={categories} products={products} />
+      <About />
+      <Reservation />
+      <Customers />
+    </React.Fragment>
+  );
 };
 
 export default index;

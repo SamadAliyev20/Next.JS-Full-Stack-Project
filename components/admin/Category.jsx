@@ -59,9 +59,10 @@ const Category = () => {
       }).then((result) => {
         if (result.isConfirmed) {
           Swal.fire("Deleted!", "You deleted category!", "success");
+          axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/categories/${id}`);
+          setCategories(categories.filter((category) => category._id !== id));
         }
-        axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/categories/${id}`);
-        setCategories(categories.filter((category) => category._id !== id));
+        
       });
     }
   };
