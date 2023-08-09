@@ -15,6 +15,9 @@ body {
 .btn-primary{
   @apply text-white px-[30px] py-[8px] rounded-3xl bg-primary hover:opacity-70 transition-all;
 }
+.btn-danger{
+  @apply text-white px-[30px] py-[8px] rounded-3xl bg-danger hover:opacity-70 transition-all;
+}
 .slick-dots {
   @apply !flex justify-start w-full;
 }

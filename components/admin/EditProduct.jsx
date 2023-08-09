@@ -58,7 +58,7 @@ const EditProduct = ({ setProductEditModal , product}) => {
     setPrices(currentPrices);
   };
 
-  const handleCreate = async () => {
+  const handleUpdate = async () => {
     const data = new FormData();
     data.append("file", file);
     data.append("upload_preset", "food-ordering");
@@ -79,7 +79,7 @@ const EditProduct = ({ setProductEditModal , product}) => {
         extraOptions,
       };
 
-      const res = await axios.post(
+      const res = await axios.put(
         `${process.env.NEXT_PUBLIC_API_URL}/products`,
         newProduct
       );

@@ -9,11 +9,13 @@ import { useRouter } from "next/router";
 import { useTheme } from "next-themes";
 import { BiMoon, BiSun } from "react-icons/bi";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [isSearchModal, setIsSearchModal] = useState(false);
   const [isMenuModal, setIsMenuModal] = useState(false);
   const router = useRouter();
+  const cart = useSelector((state) => state.cart);
   const { systemTheme, theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const currentTheme = theme === "system" ? systemTheme : theme;
@@ -120,7 +122,7 @@ const Header = () => {
             <span className="relative">
               <FaShoppingCart className="hover:text-primary transition-all cursor-pointer" />
               <span className="absolute -top-2 -right-3 text-black font-semibold bg-primary w-4 h-4 text-xd grid place-content-center rounded-full ">
-                0
+                {cart.products.length}
               </span>
             </span>
           </Link>
