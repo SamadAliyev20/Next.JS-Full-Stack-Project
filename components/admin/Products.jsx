@@ -7,6 +7,7 @@ import EditProduct from "./EditProduct";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
+  const [idProduct, setIdProduct] = useState([]);
   const [productEditModal, setProductEditModal] = useState(false);
   useEffect(() => {
     try {
@@ -36,10 +37,16 @@ const Products = () => {
           axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/products/${id}`);
           setProducts(products.filter((product) => product._id !== id));
         }
-       
       });
     }
-  }
+  };
+  const handleModal = async (id) => {
+    const product = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}/products/${id}`
+    );
+    setIdProduct(product.data);
+    setProductEditModal(true);
+  };
   return (
     <div className="lg:p-8 flex-1 lg:mt-0 mt-5">
       <Title addClass="text-[40px]">Products</Title>
@@ -92,17 +99,18 @@ const Products = () => {
                   >
                     Delete
                   </button>
+                  {productEditModal && (
+                    <EditProduct
+                      setProductEditModal={setProductEditModal}
+                      product={idProduct}
+                    />
+                  )}
                   <button
                     className="btn-primary !bg-yellow-500"
-                    onClick={() => setProductEditModal(true)}
+                    onClick={() => handleModal(product._id)}
                   >
                     Edit
                   </button>
-                  {
-                    productEditModal && (
-                      <EditProduct setProductEditModal={setProductEditModal} product={product} />
-                    )
-                  }
                 </td>
               </tr>
             ))}
